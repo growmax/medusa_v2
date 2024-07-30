@@ -1,0 +1,1 @@
+import{X as a,s as c,Y as t}from"./index-7A3rjJyE.js";var y="currencies",n=t(y),o=(r,e)=>{const{data:s,...u}=a({queryFn:()=>c.admin.currency.list(r),queryKey:n.list(r),...e});return{...s,...u}};export{o as u};

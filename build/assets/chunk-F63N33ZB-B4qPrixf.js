@@ -1,0 +1,1 @@
+import{c as o}from"./chunk-6GU6IDUA-CDc7wW5L.js";function p(r,t=!0){return typeof r=="string"&&r.trim()===""||Array.isArray(r)&&r.length===0?t?null:void 0:r}function s(r,t=!0){return Object.entries(r).reduce((n,[e,i])=>({...n,[e]:p(i,t)}),{})}function u(r,t=!0){return typeof r>"u"||typeof r=="string"&&r.trim()===""?t?null:void 0:typeof r=="string"?o(r):r}export{u as a,s as p};

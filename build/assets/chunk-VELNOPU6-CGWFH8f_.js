@@ -1,0 +1,1 @@
+import{u as t}from"./index-7A3rjJyE.js";var r=()=>{const{t:e}=t();return[{label:e("fields.createdAt"),key:"created_at"},{label:e("fields.updatedAt"),key:"updated_at"}].map(a=>({key:a.key,label:a.label,type:"date"}))};export{r as u};

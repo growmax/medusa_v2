@@ -1,0 +1,1 @@
+var s=n=>{const a=new Date,t=n.campaign;if(!t)return"ACTIVE";if(new Date(t.starts_at)>a)return"SCHEDULED";const e=t.budget,r=e&&e.used>e.limit;return t.ends_at&&new Date(t.ends_at)<a||r?"EXPIRED":"ACTIVE"};export{s as g};
