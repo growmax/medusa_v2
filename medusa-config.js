@@ -15,17 +15,17 @@ const DATABASE_URL =
 
 const REDIS_URL = process.env.REDIS_URL || "redis://localhost:6379";
 
-const plugins = [
-  // ...
-  {
-    resolve: "@medusajs/admin",
-    /** @type {import('@medusajs/admin').PluginOptions} */
-    options: {
-      autoRebuild: true,
-      // other options...
-    },
-  },
-]
+// const plugins = [
+//   // ...
+//   {
+//     resolve: "@medusajs/admin",
+//     /** @type {import('@medusajs/admin').PluginOptions} */
+//     options: {
+//       autoRebuild: true,
+//       // other options...
+//     },
+//   },
+// ]
 
 
 module.exports = defineConfig({
@@ -41,5 +41,5 @@ module.exports = defineConfig({
     },
     redis_url: REDIS_URL,
   },
-  plugins
+  // plugins
 })
