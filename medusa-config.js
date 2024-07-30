@@ -2,37 +2,36 @@ import { defineConfig, loadEnv } from '@medusajs/utils';
 
 loadEnv(process.env.NODE_ENV, process.cwd())
 
+const DB_USERNAME = process.env.DB_USERNAME
+const DB_PASSWORD = process.env.DB_PASSWORD
+const DB_HOST = process.env.DB_HOST
+const DB_PORT = process.env.DB_PORT
+const DB_DATABASE = process.env.DB_DATABASE
 
-const DATABASE_URL =
-  process.env.DATABASE_URL || "postgres://localhost/medusa-starter-default";
+const DATABASE_URL = 
+  `postgres://${DB_USERNAME}:${DB_PASSWORD}` + 
+  `@${DB_HOST}:${DB_PORT}/${DB_DATABASE}`
+  
 
 const REDIS_URL = process.env.REDIS_URL || "redis://localhost:6379";
 
 const plugins = [
-  `medusa-fulfillment-manual`,
-  `medusa-payment-manual`,
-  {
-    resolve: `@medusajs/file-local`,
-    options: {
-      upload_dir: "uploads",
-    },
-  },
+  // ...
   {
     resolve: "@medusajs/admin",
     /** @type {import('@medusajs/admin').PluginOptions} */
     options: {
       autoRebuild: true,
-      develop: {
-        open: process.env.OPEN_BROWSER !== "false",
-      },
+      // other options...
     },
   },
-];
+]
 
 
 module.exports = defineConfig({
   projectConfig: {
     databaseUrl: DATABASE_URL,
+    database_extra: { ssl: { rejectUnauthorized: false } },
     http: {
       storeCors: process.env.STORE_CORS,
       adminCors: process.env.ADMIN_CORS,
