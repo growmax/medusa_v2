@@ -16,7 +16,8 @@
     "build": "medusa build",
     "seed": "medusa exec ./src/scripts/seed.ts",
     "start": "medusa start",
-    "dev": "medusa develop"
+    "dev": "medusa develop",
+    "predeploy": "medusa migrations run && medusa links sync"
   },
   "dependencies": {
     "@medusajs/api-key": "preview",
@@ -46,7 +47,10 @@
     "@medusajs/tax": "preview",
     "@medusajs/user": "preview",
     "@medusajs/workflow-engine-inmemory": "preview",
-    "express": "^4.17.2"
+    "express": "^4.17.2",
+    "@medusajs/cache-redis": "preview",
+    "@medusajs/event-bus-redis": "preview",
+    "@medusajs/workflow-engine-redis": "preview"
   },
   "devDependencies": {
     "@medusajs/medusa-cli": "preview",

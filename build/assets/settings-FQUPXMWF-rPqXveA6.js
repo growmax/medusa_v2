@@ -1,1 +1,0 @@
-import{b as s,a,r as n,j as o,O as r}from"./index-7A3rjJyE.js";var p=()=>{const t=s(),e=a();return n.useEffect(()=>{e.pathname==="/settings"&&t("/settings/store",{replace:!0})},[e.pathname,t]),o.jsx(r,{})};export{p as Component};

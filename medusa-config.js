@@ -1,37 +1,10 @@
-import { defineConfig, loadEnv } from '@medusajs/utils';
+import { defineConfig, loadEnv } from '@medusajs/utils'
 
 loadEnv(process.env.NODE_ENV, process.cwd())
 
-const DB_USERNAME = process.env.DB_USERNAME
-const DB_PASSWORD = process.env.DB_PASSWORD
-const DB_HOST = process.env.DB_HOST
-const DB_PORT = process.env.DB_PORT
-const DB_DATABASE = process.env.DB_DATABASE
-
-const DATABASE_URL = 
-  `postgres://${DB_USERNAME}:${DB_PASSWORD}` + 
-  `@${DB_HOST}:${DB_PORT}/${DB_DATABASE}`
-  
-
-const REDIS_URL = process.env.REDIS_URL || "redis://localhost:6379";
-
-// const plugins = [
-//   // ...
-//   {
-//     resolve: "@medusajs/admin",
-//     /** @type {import('@medusajs/admin').PluginOptions} */
-//     options: {
-//       autoRebuild: true,
-//       // other options...
-//     },
-//   },
-// ]
-
-
 module.exports = defineConfig({
   projectConfig: {
-    databaseUrl: DATABASE_URL,
-    database_extra: { ssl: { rejectUnauthorized: false } },
+    databaseUrl: process.env.DATABASE_URL,
     http: {
       storeCors: process.env.STORE_CORS,
       adminCors: process.env.ADMIN_CORS,
@@ -39,7 +12,32 @@ module.exports = defineConfig({
       jwtSecret: process.env.JWT_SECRET || "supersecret",
       cookieSecret: process.env.COOKIE_SECRET || "supersecret",
     },
-    redis_url: REDIS_URL,
+    redisUrl: process.env.REDIS_URL || "redis://localhost:6379"
+
   },
-  // plugins
+  workerMode: process.env.MEDUSA_WORKER_MODE,
+  modules: {
+    // ...
+    [Modules.CACHE]: {
+      resolve: "@medusajs/cache-redis",
+      options: { 
+        redisUrl: process.env.REDIS_URL,
+      },
+    },
+    [Modules.EVENT_BUS]: {
+      resolve: "@medusajs/event-bus-redis",
+      options: { 
+        redisUrl: process.env.REDIS_URL,
+      },
+    },
+    [Modules.WORKFLOW_ENGINE]: {
+      resolve: "@medusajs/workflow-engine-redis",
+      options: {
+        redis: {
+          url: process.env.REDIS_URL,
+        },
+      },
+    }
+  }
+
 })
