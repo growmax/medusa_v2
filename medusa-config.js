@@ -12,32 +12,35 @@ module.exports = defineConfig({
       jwtSecret: process.env.JWT_SECRET || "supersecret",
       cookieSecret: process.env.COOKIE_SECRET || "supersecret",
     },
-    redisUrl: process.env.REDIS_URL || "redis://localhost:6379"
-
-  },
-  workerMode: process.env.MEDUSA_WORKER_MODE,
-  modules: {
-    // ...
-    [Modules.CACHE]: {
-      resolve: "@medusajs/cache-redis",
-      options: { 
-        redisUrl: process.env.REDIS_URL,
-      },
-    },
-    [Modules.EVENT_BUS]: {
-      resolve: "@medusajs/event-bus-redis",
-      options: { 
-        redisUrl: process.env.REDIS_URL,
-      },
-    },
-    [Modules.WORKFLOW_ENGINE]: {
-      resolve: "@medusajs/workflow-engine-redis",
-      options: {
-        redis: {
-          url: process.env.REDIS_URL,
+    redisUrl: process.env.REDIS_URL || "redis://localhost:6379",
+    modules: {
+      // ...
+      [Modules.CACHE]: {
+        resolve: "@medusajs/cache-redis",
+        options: { 
+          redisUrl: process.env.REDIS_URL,
         },
       },
+      [Modules.EVENT_BUS]: {
+        resolve: "@medusajs/event-bus-redis",
+        options: { 
+          redisUrl: process.env.REDIS_URL,
+        },
+      },
+      [Modules.WORKFLOW_ENGINE]: {
+        resolve: "@medusajs/workflow-engine-redis",
+        options: {
+          redis: {
+            url: process.env.REDIS_URL,
+          },
+        },
+      }
     }
+  
+  
+  },
+  workerMode: process.env.MEDUSA_WORKER_MODE,
+  admin: {
+    disable: process.env.DISABLE_MEDUSA_ADMIN === "true"
   }
-
 })
